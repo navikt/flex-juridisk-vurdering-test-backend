@@ -12,11 +12,11 @@ import java.time.OffsetDateTime
 interface JuridiskVurderingRepository : CrudRepository<JuridiskVurderingDbRecord, String> {
     fun findByFnr(fnr: String): List<JuridiskVurderingDbRecord>
     @Modifying
-    @Query("delete from Syketilfellebit s where s.fnr = :fnr")
+    @Query("delete from juridisk_vurdering s where s.fnr = :fnr")
     fun deleteByFnr(fnr: String): Long
 }
 
-@Table("syketilfellebit")
+@Table("juridisk_vurdering")
 data class JuridiskVurderingDbRecord(
     @Id
     val id: String? = null,
