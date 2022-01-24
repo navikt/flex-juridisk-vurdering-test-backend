@@ -25,7 +25,7 @@ spec:
     initialDelay: 10
     periodSeconds: 5
     timeout: 5
-    failureThreshold: 1+
+    failureThreshold: 10
   resources:
     limits:
       cpu: 300m
