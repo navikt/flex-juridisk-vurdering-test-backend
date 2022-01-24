@@ -1,6 +1,7 @@
 package no.nav.helse.flex.juridiskvurdering
 
 import org.amshove.kluent.`should be equal to`
+import org.amshove.kluent.shouldBeEmpty
 import org.apache.kafka.clients.consumer.ConsumerRecord
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -19,5 +20,9 @@ class LagreOgHentTest : Testoppsett() {
         juridiskVurderingListener.listen(ConsumerRecord("topic", 0, 0L, "fg", json)) { }
 
         juridiskVurderingRepository.findByFnr("12345").first().juridiskVurdering `should be equal to` json
+
+        juridiskVurderingRepository.deleteByFnr("12345")
+
+        juridiskVurderingRepository.findByFnr("12345").shouldBeEmpty()
     }
 }

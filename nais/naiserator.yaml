@@ -9,7 +9,7 @@ spec:
   image: {{image}}
   replicas:
     min: 1
-    max: 1
+    max: 2
     cpuThresholdPercentage: 90
   port: 8080
   ingresses:
@@ -19,7 +19,7 @@ spec:
     initialDelay: 10
     timeout: 5
     periodSeconds: 5
-    failureThreshold: 30
+    failureThreshold: 90
   readiness:
     path: /internal/health
     initialDelay: 10
