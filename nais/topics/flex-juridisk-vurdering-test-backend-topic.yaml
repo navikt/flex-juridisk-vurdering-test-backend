@@ -1,0 +1,26 @@
+apiVersion: kafka.nais.io/v1
+kind: Topic
+metadata:
+  name: juridisk-vurdering-test
+  namespace: flex
+  labels:
+    team: flex
+spec:
+  pool: {{kafkaPool}}
+  config:
+    cleanupPolicy: delete
+    minimumInSyncReplicas: 1
+    partitions: 1
+    replication: 2
+    retentionBytes: -1
+    retentionHours: -1
+  acl:
+    - team: flex
+      application: flex-juridisk-vurdering-test-backend
+      access: read
+    - team: flex
+      application: syfosoknad
+      access: write
+    - team: flex
+      application: flex-syketilfelle
+      access: write

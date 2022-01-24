@@ -1,0 +1,5 @@
+{
+  "azureTenant": "trygdeetaten.no",
+  "kafkaPool": "nav-dev",
+  "ingress": "https://flex-juridisk-vurdering-test-backend.dev.nav.no"
+}
