@@ -2,6 +2,7 @@ package no.nav.helse.flex.juridiskvurdering
 
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.ResponseBody
 import org.springframework.web.bind.annotation.RestController
@@ -14,7 +15,7 @@ class JuridiskVurderingApi(
 
     @ResponseBody
     @GetMapping(value = ["/vurderinger/{fnr}"], produces = [MediaType.APPLICATION_JSON_VALUE])
-    fun hentVurderinger(fnr: String): List<JuridiskVurderingDbRecord> {
+    fun hentVurderinger(@PathVariable fnr: String): List<JuridiskVurderingDbRecord> {
         return juridiskVurderingRepository.findByFnr(fnr)
     }
 }
