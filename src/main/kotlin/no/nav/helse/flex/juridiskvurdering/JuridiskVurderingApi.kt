@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.ResponseBody
 import org.springframework.web.bind.annotation.RestController
-import java.time.Instant
 import java.time.OffsetDateTime
 
 @RestController
@@ -25,7 +24,6 @@ class JuridiskVurderingApi(
     private fun JuridiskVurderingDbRecord.tilVurderingResponse(): VurderingResponse =
         VurderingResponse(fnr = fnr, opprettet = opprettet, vurdering = juridiskVurdering)
 
-
     data class VurderingResponse(
         val fnr: String,
         val opprettet: OffsetDateTime,
@@ -33,4 +31,3 @@ class JuridiskVurderingApi(
         val vurdering: String
     )
 }
-
