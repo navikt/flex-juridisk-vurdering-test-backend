@@ -1,11 +1,18 @@
 spring:
   profiles:
     active: test
+  flyway:
+    enabled: true
+  datasource:
+    hikari:
+      minimum-idle: 1
+      maximum-pool-size: 3
 
 logging.config: "classpath:logback-local.xml"
 
 aiven-kafka:
   security-protocol: PLAINTEXT
+  auto-offset-reset: earliest
 
 KAFKA_TRUSTSTORE_PATH: ""
 KAFKA_CREDSTORE_PASSWORD: ""

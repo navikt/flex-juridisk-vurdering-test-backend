@@ -5,6 +5,15 @@ spring:
   main.banner-mode: 'off'
   profiles:
     active: default
+  flyway:
+    enabled: true
+  datasource:
+    url: "jdbc:postgresql://${NAIS_DATABASE_FLEX_JURIDISK_VURDERING_TEST_BACKEND_JURIDISK_VURDERING_DB_HOST}:${NAIS_DATABASE_FLEX_JURIDISK_VURDERING_TEST_BACKEND_JURIDISK_VURDERING_DB_PORT}/${NAIS_DATABASE_FLEX_JURIDISK_VURDERING_TEST_BACKEND_JURIDISK_VURDERING_DB_DATABASE}?reWriteBatchedInserts=true"
+    username: ${NAIS_DATABASE_FLEX_JURIDISK_VURDERING_TEST_BACKEND_JURIDISK_VURDERING_DB_USERNAME}
+    password: ${NAIS_DATABASE_FLEX_JURIDISK_VURDERING_TEST_BACKEND_JURIDISK_VURDERING_DB_PASSWORD}
+    hikari:
+      minimum-idle: 1
+      maximum-pool-size: 3
 
 logging.config: "classpath:logback.xml"
 
@@ -14,5 +23,5 @@ management:
     exposure.include: health
 
 aiven-kafka:
-  auto-offset-reset: none
+  auto-offset-reset: earliest
   security-protocol: SSL
