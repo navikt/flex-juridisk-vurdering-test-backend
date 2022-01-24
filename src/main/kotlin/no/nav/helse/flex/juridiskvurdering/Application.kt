@@ -1,4 +1,4 @@
-package no.nav.helse.flex.testdata
+package no.nav.helse.flex.juridiskvurdering
 
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory

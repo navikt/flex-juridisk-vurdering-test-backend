@@ -1,4 +1,4 @@
-package no.nav.helse.flex.testdata
+package no.nav.helse.flex.juridiskvurdering
 
 import org.junit.jupiter.api.Test
 

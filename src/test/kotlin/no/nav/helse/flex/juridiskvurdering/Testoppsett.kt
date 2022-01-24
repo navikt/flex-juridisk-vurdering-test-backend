@@ -1,6 +1,6 @@
-package no.nav.helse.flex.testdata
+package no.nav.helse.flex.juridiskvurdering
 
-import no.nav.helse.flex.testdata.kafka.TESTDATA_RESET_TOPIC
+import no.nav.helse.flex.juridiskvurdering.kafka.TESTDATA_RESET_TOPIC
 import org.amshove.kluent.shouldBeEmpty
 import org.apache.kafka.clients.consumer.Consumer
 import org.junit.jupiter.api.AfterAll
