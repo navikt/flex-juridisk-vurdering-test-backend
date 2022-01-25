@@ -2,6 +2,7 @@ package no.nav.helse.flex.juridiskvurdering
 
 import com.fasterxml.jackson.annotation.JsonRawValue
 import org.springframework.http.MediaType
+import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
@@ -17,6 +18,7 @@ class JuridiskVurderingApi(
 
     @ResponseBody
     @GetMapping(value = ["/vurderinger/{fnr}"], produces = [MediaType.APPLICATION_JSON_VALUE])
+    @CrossOrigin
     fun hentVurderinger(@PathVariable fnr: String): List<VurderingResponse> {
         return juridiskVurderingRepository.findByFnr(fnr).map { it.tilVurderingResponse() }
     }
