@@ -16,7 +16,7 @@ class LagreOgHentTest : Testoppsett() {
 
     @Test
     fun contextLoads() {
-        val json = """{ "fødselsnummer": "12345", "annenKey": 123 }"""
+        val json = """{ "fodselsnummer": "12345", "annenKey": 123 }"""
         juridiskVurderingListener.listen(ConsumerRecord("topic", 0, 0L, "fg", json)) { }
 
         juridiskVurderingRepository.findByFnr("12345").first().juridiskVurdering `should be equal to` json

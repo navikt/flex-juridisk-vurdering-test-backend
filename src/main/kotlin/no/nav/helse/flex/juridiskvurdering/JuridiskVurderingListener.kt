@@ -20,7 +20,7 @@ class JuridiskVurderingListener(
     )
     fun listen(cr: ConsumerRecord<String, String>, acknowledgment: Acknowledgment) {
 
-        val fnr = cr.value().tilMedFnr().fødselsnummer
+        val fnr = cr.value().tilMedFnr().fodselsnummer
         juridiskVurderingRepository.save(
             JuridiskVurderingDbRecord(
                 id = null,
@@ -33,7 +33,7 @@ class JuridiskVurderingListener(
         acknowledgment.acknowledge()
     }
 
-    data class MedFnr(val fødselsnummer: String)
+    data class MedFnr(val fodselsnummer: String)
 
     fun String.tilMedFnr(): MedFnr = objectMapper.readValue(this)
 }
