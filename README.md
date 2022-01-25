@@ -1,6 +1,6 @@
 # flex-juridisk-vurdering-test-backend
 
-Konsumerer juridisk vurdering tet topicet og tilbyr et API i dev
+Konsumerer juridisk vurdering test topicet og tilbyr et API i dev
 
 # Henvendelser
 
