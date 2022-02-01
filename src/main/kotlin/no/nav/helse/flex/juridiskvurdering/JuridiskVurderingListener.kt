@@ -14,7 +14,7 @@ class JuridiskVurderingListener(
 ) {
 
     @KafkaListener(
-        topics = ["flex.juridisk-vurdering-test"],
+        topics = ["flex.omrade-helse-etterlevelse"],
         idIsGroup = false,
         containerFactory = "aivenKafkaListenerContainerFactory",
     )
