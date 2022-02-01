@@ -21,6 +21,6 @@ spec:
     - team: flex
       application: syfosoknad
       access: write
-    - team: flex
-      application: flex-syketilfelle
+    - team: teamsykmelding
+      application: teamsykmelding-pik
       access: write
