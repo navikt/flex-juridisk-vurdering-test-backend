@@ -3,6 +3,8 @@ kind: Topic
 metadata:
   name: juridisk-vurdering-test
   namespace: flex
+  annotations:
+    kafka.nais.io/removeDataWhenResourceIsDeleted: "true"
   labels:
     team: flex
 spec:
