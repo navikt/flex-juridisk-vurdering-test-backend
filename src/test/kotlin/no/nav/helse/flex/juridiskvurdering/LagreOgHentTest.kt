@@ -17,12 +17,12 @@ class LagreOgHentTest : Testoppsett() {
     @Test
     fun contextLoads() {
         val json = """{ "fodselsnummer": "12345", "annenKey": 123 }"""
-        juridiskVurderingListener.listen(ConsumerRecord("topic", 0, 0L, "fg", json)) { }
+        juridiskVurderingListener.listen(ConsumerRecord("topic", 0, 0L, "12345678987", json)) { }
 
-        juridiskVurderingRepository.findByFnr("12345").first().juridiskVurdering `should be equal to` json
+        juridiskVurderingRepository.findByFnr("12345678987").first().juridiskVurdering `should be equal to` json
 
-        juridiskVurderingRepository.deleteByFnr("12345")
+        juridiskVurderingRepository.deleteByFnr("12345678987")
 
-        juridiskVurderingRepository.findByFnr("12345").shouldBeEmpty()
+        juridiskVurderingRepository.findByFnr("12345678987").shouldBeEmpty()
     }
 }

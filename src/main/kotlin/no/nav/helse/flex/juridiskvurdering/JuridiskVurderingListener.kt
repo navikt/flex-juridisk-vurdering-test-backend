@@ -1,6 +1,5 @@
 package no.nav.helse.flex.juridiskvurdering
 
-import com.fasterxml.jackson.module.kotlin.readValue
 import org.apache.kafka.clients.consumer.ConsumerRecord
 import org.springframework.kafka.annotation.KafkaListener
 import org.springframework.kafka.support.Acknowledgment
@@ -9,9 +8,10 @@ import java.time.OffsetDateTime
 
 @Component
 class JuridiskVurderingListener(
-
     private val juridiskVurderingRepository: JuridiskVurderingRepository,
 ) {
+
+    val log = logger()
 
     @KafkaListener(
         topics = ["flex.omrade-helse-etterlevelse"],
@@ -20,20 +20,20 @@ class JuridiskVurderingListener(
     )
     fun listen(cr: ConsumerRecord<String, String>, acknowledgment: Acknowledgment) {
 
-        val fnr = cr.value().tilMedFnr().fodselsnummer
-        juridiskVurderingRepository.save(
-            JuridiskVurderingDbRecord(
-                id = null,
-                fnr = fnr,
-                opprettet = OffsetDateTime.now(),
-                juridiskVurdering = cr.value()
+        val fnr = cr.key()
+        if (fnr.erFnr()) {
+            juridiskVurderingRepository.save(
+                JuridiskVurderingDbRecord(
+                    id = null,
+                    fnr = fnr,
+                    opprettet = OffsetDateTime.now(),
+                    juridiskVurdering = cr.value()
+                )
             )
-        )
+        } else {
+            log.error("Key på kafka er ikke : $fnr , hele meldingen: ${cr.value()}")
+        }
 
         acknowledgment.acknowledge()
     }
-
-    data class MedFnr(val fodselsnummer: String)
-
-    fun String.tilMedFnr(): MedFnr = objectMapper.readValue(this)
 }
