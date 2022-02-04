@@ -11,6 +11,9 @@ import java.time.OffsetDateTime
 @Repository
 interface JuridiskVurderingRepository : CrudRepository<JuridiskVurderingDbRecord, String> {
     fun findByFnr(fnr: String): List<JuridiskVurderingDbRecord>
+
+    fun findByParagraf(paragraf: String): List<JuridiskVurderingDbRecord>
+
     @Modifying
     @Query("delete from juridisk_vurdering s where s.fnr = :fnr")
     fun deleteByFnr(fnr: String): Long
@@ -23,4 +26,6 @@ data class JuridiskVurderingDbRecord(
     val fnr: String,
     val opprettet: OffsetDateTime,
     val juridiskVurdering: String,
+    val paragraf: String,
+    val utfall: String,
 )

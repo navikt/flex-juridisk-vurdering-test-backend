@@ -18,7 +18,7 @@ class TestdataResetListener(val juridiskVurderingRepository: JuridiskVurderingRe
     fun listen(cr: ConsumerRecord<String, String>, acknowledgment: Acknowledgment) {
         val fnr = cr.value()
         val antall = juridiskVurderingRepository.deleteByFnr(fnr)
-        log.info("Slettet $antall soknader på fnr $fnr - Key ${cr.key()}")
+        log.info("Slettet $antall vurderinger på fnr $fnr - Key ${cr.key()}")
         acknowledgment.acknowledge()
     }
 }

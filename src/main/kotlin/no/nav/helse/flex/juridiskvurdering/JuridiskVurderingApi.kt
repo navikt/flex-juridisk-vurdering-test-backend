@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.ResponseBody
 import org.springframework.web.bind.annotation.RestController
 import java.time.OffsetDateTime
@@ -15,6 +16,13 @@ import java.time.OffsetDateTime
 class JuridiskVurderingApi(
     private val juridiskVurderingRepository: JuridiskVurderingRepository,
 ) {
+
+    @ResponseBody
+    @GetMapping(value = ["/vurderinger/"], produces = [MediaType.APPLICATION_JSON_VALUE])
+    @CrossOrigin
+    fun hentAlleVurderinger(@RequestParam paragraf: String): List<VurderingResponse> {
+        return juridiskVurderingRepository.findByParagraf(paragraf).map { it.tilVurderingResponse() }
+    }
 
     @ResponseBody
     @GetMapping(value = ["/vurderinger/{fnr}"], produces = [MediaType.APPLICATION_JSON_VALUE])
