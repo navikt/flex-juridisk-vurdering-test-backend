@@ -20,29 +20,33 @@ class JuridiskVurderingListener(
         containerFactory = "aivenKafkaListenerContainerFactory",
     )
     fun listen(cr: ConsumerRecord<String, String>, acknowledgment: Acknowledgment) {
+        val key = cr.key()
+        val value = cr.value()
 
         data class FelterFraVurdering(val paragraf: String, val utfall: String)
+        try {
 
-        val fnr = cr.key()
-        val juridiskVurderingJson = cr.value()
-        if (fnr.erFnr()) {
+            if (key.erFnr()) {
 
-            val deserialisert: FelterFraVurdering = objectMapper.readValue(juridiskVurderingJson)
+                val deserialisert: FelterFraVurdering = objectMapper.readValue(value)
 
-            juridiskVurderingRepository.save(
-                JuridiskVurderingDbRecord(
-                    id = null,
-                    fnr = fnr,
-                    opprettet = OffsetDateTime.now(),
-                    juridiskVurdering = juridiskVurderingJson,
-                    paragraf = deserialisert.paragraf,
-                    utfall = deserialisert.utfall,
+                juridiskVurderingRepository.save(
+                    JuridiskVurderingDbRecord(
+                        id = null,
+                        fnr = key,
+                        opprettet = OffsetDateTime.now(),
+                        juridiskVurdering = value,
+                        paragraf = deserialisert.paragraf,
+                        utfall = deserialisert.utfall,
+                    )
                 )
-            )
-        } else {
-            log.error("Key på kafka er ikke : $fnr , hele meldingen: $juridiskVurderingJson")
+            } else {
+                log.error("Key på kafka er ikke fnr: $key , hele meldingen: $value")
+            }
+        } catch (e: Exception) {
+            log.error("Feil ved prossesering av melding på kafka. denne forkastes. $key - $value ", e)
+        } finally {
+            acknowledgment.acknowledge()
         }
-
-        acknowledgment.acknowledge()
     }
 }
