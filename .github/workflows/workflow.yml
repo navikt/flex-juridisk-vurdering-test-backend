@@ -63,7 +63,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
       - name: Last ned versjon
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: VERSION.txt
           path: .
@@ -84,7 +84,7 @@ jobs:
     needs: build-and-publish
     steps:
       - name: Last ned versjon
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: VERSION.txt
           path: .
