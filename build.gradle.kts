@@ -17,7 +17,7 @@ buildscript {
         maven("https://plugins.gradle.org/m2/")
     }
     dependencies {
-        classpath("org.jlleitschuh.gradle:ktlint-gradle:10.3.0")
+        classpath("org.jlleitschuh.gradle:ktlint-gradle:11.0.0")
     }
 }
 
@@ -27,7 +27,7 @@ repositories {
     mavenCentral()
 }
 
-val logstashEncoderVersion = "7.1.1"
+val logstashEncoderVersion = "7.2"
 val testContainersVersion = "1.17.2"
 val kluentVersion = "1.68"
 
