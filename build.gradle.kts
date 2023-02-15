@@ -17,7 +17,7 @@ buildscript {
         maven("https://plugins.gradle.org/m2/")
     }
     dependencies {
-        classpath("org.jlleitschuh.gradle:ktlint-gradle:11.1.0")
+        classpath("org.jlleitschuh.gradle:ktlint-gradle:11.2.0")
     }
 }
 
