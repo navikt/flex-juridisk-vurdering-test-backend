@@ -9,7 +9,7 @@ import java.time.OffsetDateTime
 
 @Component
 class JuridiskVurderingListener(
-    private val juridiskVurderingRepository: JuridiskVurderingRepository,
+    private val juridiskVurderingRepository: JuridiskVurderingRepository
 ) {
 
     val log = logger()
@@ -17,7 +17,7 @@ class JuridiskVurderingListener(
     @KafkaListener(
         topics = ["flex.omrade-helse-etterlevelse"],
         idIsGroup = false,
-        containerFactory = "aivenKafkaListenerContainerFactory",
+        containerFactory = "aivenKafkaListenerContainerFactory"
     )
     fun listen(cr: ConsumerRecord<String, String>, acknowledgment: Acknowledgment) {
         val key = cr.key()
@@ -25,9 +25,7 @@ class JuridiskVurderingListener(
 
         data class FelterFraVurdering(val paragraf: String, val utfall: String)
         try {
-
             if (key.erFnr()) {
-
                 val deserialisert: FelterFraVurdering = objectMapper.readValue(value)
 
                 juridiskVurderingRepository.save(
@@ -37,7 +35,7 @@ class JuridiskVurderingListener(
                         opprettet = OffsetDateTime.now(),
                         juridiskVurdering = value,
                         paragraf = deserialisert.paragraf,
-                        utfall = deserialisert.utfall,
+                        utfall = deserialisert.utfall
                     )
                 )
             } else {

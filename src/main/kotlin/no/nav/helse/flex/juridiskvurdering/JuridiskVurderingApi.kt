@@ -14,7 +14,7 @@ import java.time.OffsetDateTime
 @RestController
 @RequestMapping(value = ["/api"])
 class JuridiskVurderingApi(
-    private val juridiskVurderingRepository: JuridiskVurderingRepository,
+    private val juridiskVurderingRepository: JuridiskVurderingRepository
 ) {
 
     @ResponseBody

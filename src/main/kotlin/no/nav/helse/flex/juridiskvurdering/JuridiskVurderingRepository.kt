@@ -27,5 +27,5 @@ data class JuridiskVurderingDbRecord(
     val opprettet: OffsetDateTime,
     val juridiskVurdering: String,
     val paragraf: String,
-    val utfall: String,
+    val utfall: String
 )
