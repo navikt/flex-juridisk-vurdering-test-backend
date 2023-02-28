@@ -17,7 +17,7 @@ repositories {
     mavenCentral()
 }
 
-val logstashLogbackEncoderVersion = "7.2"
+val logstashLogbackEncoderVersion = "7.3"
 val testContainersVersion = "1.17.6"
 val kluentVersion = "1.72"
 
