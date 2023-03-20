@@ -1,4 +1,4 @@
 {
   "kafkaPool": "nav-dev",
-  "ingress": "https://flex-juridisk-vurdering-test-backend.dev.nav.no"
+  "ingress": "https://flex-juridisk-vurdering-test-backend.intern.dev.nav.no"
 }
