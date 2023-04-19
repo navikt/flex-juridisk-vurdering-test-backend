@@ -28,10 +28,10 @@ spec:
     failureThreshold: 10
   resources:
     limits:
-      memory: 300Mi
+      memory: 400Mi
     requests:
       cpu: 100m
-      memory: 100Mi
+      memory: 400Mi
   gcp:
     sqlInstances:
       - type: POSTGRES_12
