@@ -16,16 +16,11 @@ spec:
     - {{ingress}}
   liveness:
     path: /internal/health
-    initialDelay: 10
-    timeout: 5
-    periodSeconds: 5
-    failureThreshold: 90
   readiness:
     path: /internal/health
-    initialDelay: 10
-    periodSeconds: 5
-    timeout: 5
-    failureThreshold: 10
+  startup:
+    path: /internal/health
+    initialDelay: 40
   resources:
     limits:
       memory: 400Mi
