@@ -10,7 +10,9 @@ spec:
   replicas:
     min: 1
     max: 2
-    cpuThresholdPercentage: 90
+    scalingStrategy:
+      cpu:
+        thresholdPercentage: 90
   port: 8080
   ingresses:
     - {{ingress}}
