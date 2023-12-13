@@ -1,6 +1,5 @@
 package no.nav.helse.flex.juridiskvurdering.kafka
 
-import no.nav.helse.flex.juridiskvurdering.logger
 import org.apache.kafka.clients.consumer.Consumer
 import org.apache.kafka.clients.consumer.ConsumerRecord
 import org.apache.kafka.clients.consumer.ConsumerRecords
@@ -8,6 +7,7 @@ import org.springframework.kafka.listener.*
 import org.springframework.stereotype.Component
 import org.springframework.util.backoff.ExponentialBackOff
 import java.lang.Exception
+import no.nav.helse.flex.juridiskvurdering.logger as slf4jLogger
 
 @Component
 class KafkaErrorHandler : DefaultErrorHandler(
@@ -16,7 +16,8 @@ class KafkaErrorHandler : DefaultErrorHandler(
         maxInterval = 60_000L * 8
     },
 ) {
-    val log = logger()
+    // Bruker aliased logger for unngå kollisjon med CommonErrorHandler.logger(): LogAccessor.
+    val log = slf4jLogger()
 
     override fun handleRemaining(
         thrownException: Exception,
