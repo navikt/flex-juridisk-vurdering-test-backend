@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 
 class LagreOgHentTest : Testoppsett() {
-
     @Autowired
     lateinit var juridiskVurderingListener: JuridiskVurderingListener
 

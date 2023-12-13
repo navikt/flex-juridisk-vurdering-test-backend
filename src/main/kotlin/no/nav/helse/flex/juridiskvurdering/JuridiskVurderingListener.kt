@@ -9,17 +9,19 @@ import java.time.OffsetDateTime
 
 @Component
 class JuridiskVurderingListener(
-    private val juridiskVurderingRepository: JuridiskVurderingRepository
+    private val juridiskVurderingRepository: JuridiskVurderingRepository,
 ) {
-
     val log = logger()
 
     @KafkaListener(
         topics = ["flex.omrade-helse-etterlevelse"],
         idIsGroup = false,
-        containerFactory = "aivenKafkaListenerContainerFactory"
+        containerFactory = "aivenKafkaListenerContainerFactory",
     )
-    fun listen(cr: ConsumerRecord<String, String>, acknowledgment: Acknowledgment) {
+    fun listen(
+        cr: ConsumerRecord<String, String>,
+        acknowledgment: Acknowledgment,
+    ) {
         val key = cr.key()
         val value = cr.value()
 
@@ -35,8 +37,8 @@ class JuridiskVurderingListener(
                         opprettet = OffsetDateTime.now(),
                         juridiskVurdering = value,
                         paragraf = deserialisert.paragraf,
-                        utfall = deserialisert.utfall
-                    )
+                        utfall = deserialisert.utfall,
+                    ),
                 )
             } else {
                 log.error("Key på kafka er ikke fnr: $key , hele meldingen: $value")
