@@ -15,7 +15,6 @@ private class PostgreSQLContainer12 : PostgreSQLContainer<PostgreSQLContainer12>
 @SpringBootTest
 @AutoConfigureMockMvc
 abstract class Testoppsett {
-
     @Autowired
     lateinit var mockMvc: MockMvc
 

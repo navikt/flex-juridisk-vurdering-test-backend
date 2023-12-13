@@ -14,20 +14,23 @@ import java.time.OffsetDateTime
 @RestController
 @RequestMapping(value = ["/api"])
 class JuridiskVurderingApi(
-    private val juridiskVurderingRepository: JuridiskVurderingRepository
+    private val juridiskVurderingRepository: JuridiskVurderingRepository,
 ) {
-
     @ResponseBody
     @GetMapping(value = ["/vurderinger/"], produces = [MediaType.APPLICATION_JSON_VALUE])
     @CrossOrigin
-    fun hentAlleVurderinger(@RequestParam paragraf: String): List<VurderingResponse> {
+    fun hentAlleVurderinger(
+        @RequestParam paragraf: String,
+    ): List<VurderingResponse> {
         return juridiskVurderingRepository.findByParagraf(paragraf).map { it.tilVurderingResponse() }
     }
 
     @ResponseBody
     @GetMapping(value = ["/vurderinger/{fnr}"], produces = [MediaType.APPLICATION_JSON_VALUE])
     @CrossOrigin
-    fun hentVurderinger(@PathVariable fnr: String): List<VurderingResponse> {
+    fun hentVurderinger(
+        @PathVariable fnr: String,
+    ): List<VurderingResponse> {
         return juridiskVurderingRepository.findByFnr(fnr).map { it.tilVurderingResponse() }
     }
 
@@ -38,6 +41,6 @@ class JuridiskVurderingApi(
         val fnr: String,
         val opprettet: OffsetDateTime,
         @JsonRawValue
-        val vurdering: String
+        val vurdering: String,
     )
 }
