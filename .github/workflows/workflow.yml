@@ -37,7 +37,7 @@ jobs:
       - name: Bygg
         run: ./gradlew bootJar
       - name: docker-build-push
-        if: github.ref_name == 'master' || startsWith(github.ref_name, 'dev-')
+        if: github.ref_name == 'main' || startsWith(github.ref_name, 'dev-')
         uses: nais/docker-build-push@v0
         id: docker-build-push
         with:
@@ -46,9 +46,11 @@ jobs:
           project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
 
   deploy-to-dev-gcp:
-    if: github.ref_name == 'master' || startsWith(github.ref_name, 'dev-')
+    if: github.ref_name == 'main' || startsWith(github.ref_name, 'dev-')
     name: Deploy til dev-gcp
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
     needs: build-and-publish
     concurrency: deploy-to-dev-gcp
     steps:
@@ -57,7 +59,6 @@ jobs:
       - uses: nais/deploy/actions/deploy@v2
         name: Deploy to dev-gcp
         env:
-          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           IMAGE: ${{ needs.build-and-publish.outputs.image }}
           CLUSTER: dev-gcp
           RESOURCE: nais/app/naiserator.yaml
