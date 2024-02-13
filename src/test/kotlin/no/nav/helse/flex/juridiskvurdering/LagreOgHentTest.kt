@@ -6,7 +6,7 @@ import org.apache.kafka.clients.consumer.ConsumerRecord
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 
-class LagreOgHentTest : Testoppsett() {
+class LagreOgHentTest : FellesTestOppsett() {
     @Autowired
     lateinit var juridiskVurderingListener: JuridiskVurderingListener
 
