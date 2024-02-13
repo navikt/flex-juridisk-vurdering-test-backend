@@ -15,10 +15,12 @@ private class PostgreSQLContainer14 : PostgreSQLContainer<PostgreSQLContainer14>
 @SpringBootTest
 @AutoConfigureMockMvc
 abstract class FellesTestOppsett {
+
     @Autowired
     lateinit var mockMvc: MockMvc
 
     companion object {
+
         init {
             PostgreSQLContainer14().also {
                 it.start()
