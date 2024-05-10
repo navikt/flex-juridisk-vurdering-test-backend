@@ -33,6 +33,7 @@ spec:
     sqlInstances:
       - type: POSTGRES_12
         diskAutoresize: true
+        cascadingDelete: true
         databases:
           - name: juridisk-vurdering-db
   kafka:
